@@ -1,0 +1,33 @@
+.nutritions-layout{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+
+
+
+     div {
+    
+    border-radius: 46px;
+    border-color: black;
+    border: solid 1px;
+}
+
+}
+
+.nutritions-layout .calories {
+    
+    .icon {
+    background-color: white;
+    padding: 8px;
+    border-radius: 6px;
+    margin: 4px 0;
+    width: 52px;
+    height: 52px;
+   
+    }
+}
+
+
+
+

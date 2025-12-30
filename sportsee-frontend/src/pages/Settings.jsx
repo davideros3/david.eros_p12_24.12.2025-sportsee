@@ -1,0 +1,10 @@
+const Settings = () => {
+  return (
+    <div className="community page-center">
+      <h1>Settings</h1>
+      <p>Coming Soon... </p>
+    </div>
+  );
+};
+
+export default Settings;
