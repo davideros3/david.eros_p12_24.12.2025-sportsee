@@ -1,0 +1,99 @@
+.activity-card {
+  background: #fbfbfb;      
+ 
+  padding: 24px 30px;
+}
+
+.activity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.activity-header h2 {
+  margin: 0;
+  font-size: 25px;
+  font-weight: 700;
+  color: #20253a;
+}
+
+.activity-chart {
+  width: 100%;
+  height: clamp(220px, 28vw, 300px);
+}
+
+
+.activity-tooltip {
+  background: #e60000;
+  color: #fff;
+  padding: 3px 10px;     
+    border-radius: 0;     
+}
+
+.activity-card .recharts-legend-item-text {
+  font-size: 20px;
+}
+
+.activity-tooltip p {
+  margin: 0;
+  line-height: 1.8;
+   font-size: 15px; 
+}
+/* Kill radius on every tooltip element Recharts uses */
+
+.recharts-tooltip-wrapper * ,
+.recharts-default-tooltip {
+  border-radius: 0 !important;
+}
+
+
+.activity-chart {
+  width: 100%;
+  height: 300px; 
+}
+
+/**Responsive **/
+@media (max-width: 1024px) {
+  .activity-card {
+    padding: 18px 18px; 
+  }
+
+  .activity-header h2 {
+    font-size: 20px; 
+  }
+
+  .activity-chart {
+    height: 260px; 
+  }
+
+ 
+  .activity-tooltip p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+ 
+  .activity-card .recharts-legend-item-text {
+    font-size: 12px;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .activity-header h2 {
+    font-size: 18px;
+  }
+
+  .activity-chart {
+    height: 240px;
+  }
+
+  .activity-card .recharts-legend-item-text {
+    font-size: 11px;
+  }
+}
+
+.activity-card {
+  min-width: 0;
+}

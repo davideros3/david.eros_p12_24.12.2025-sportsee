@@ -1,71 +1,65 @@
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
-import { RechartsDevtools } from '@recharts/devtools';
+/**
+ * PerformanceRadar component that displays user performance data in a radar chart.
+ */
 
-// #region Sample data
-const data = [
-  {
-    subject: 'Math',
-    A: 120,
-    B: 110,
-    fullMark: 150,
-  },
-  {
-    subject: 'Chinese',
-    A: 98,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: 'English',
-    A: 86,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: 'Geography',
-    A: 99,
-    B: 100,
-    fullMark: 150,
-  },
-  {
-    subject: 'Physics',
-    A: 85,
-    B: 90,
-    fullMark: 150,
-  },
-  {
-    subject: 'History',
-    A: 65,
-    B: 85,
-    fullMark: 150,
-  },
-];
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
+} from "recharts";
+import useUserPerformance from "../utilities/useUserPerformance";
 
-// #endregion
+/**
+ * Renders a radar chart showing different performance metrics.
+ *
+ * @returns {JSX.Element|null}
+ */
 const PerformanceRadar = () => {
+  // Gets performance labels and values from the custom hook.
+  const { performance, performanceData } = useUserPerformance();
+
+  // Stops rendering if performance data is not available.
+  if (!performance || !performanceData) return null;
+
+  // Formats the performance data to match the radar chart structure.
+  const chartData = performanceData.map((item) => ({
+    subject: performance[item.kind],
+    value: item.value,
+  }));
+
   return (
-    <div style={{ backgroundColor: '#282D30', padding: '15px', borderRadius: '5px' }}>
-      <RadarChart
-        width={300}
-        height={250}
-        outerRadius="80%"
-        data={data}
-      >
-        <PolarGrid stroke="#FFFFFF"   radialLines={false}  />
-        <PolarAngleAxis
-          dataKey="subject"
-          tick={{ fontSize: 10, fill: '#FFFFFF' }}
-        />
-        <PolarRadiusAxis tick={false} axisLine={false} />
-        <Radar
-          dataKey="A"
-          stroke="#FF0101"
-          fill="#FF0101"
-          fillOpacity={0.7}
-        />
-      </RadarChart>
+    // Main container for the performance radar chart.
+    // It applies a dark style to the chart card.
+    <div className="chart-card chart-card--dark">
+      {/* Makes the chart responsive to its container size. */}
+      <ResponsiveContainer width="100%" height="100%">
+        <RadarChart data={chartData} outerRadius="75%">
+          {/* Displays the grid lines of the radar chart. */}
+          <PolarGrid stroke="#FFFFFF" radialLines={false} />
+
+          {/* Displays the labels around the radar chart. */}
+          <PolarAngleAxis
+            dataKey="subject"
+            tick={{ fontSize: 10, fill: "#FFFFFF" }}
+          />
+
+          {/* Hides the radius axis for a cleaner look. */}
+          <PolarRadiusAxis tick={false} axisLine={false} />
+
+          {/* Displays the red radar shape representing performance values. */}
+          <Radar
+            dataKey="value"
+            stroke="#FF0101"
+            fill="#FF0101"
+            fillOpacity={0.7}
+          />
+        </RadarChart>
+      </ResponsiveContainer>
     </div>
   );
-}
+};
 
 export default PerformanceRadar;

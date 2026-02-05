@@ -1,0 +1,32 @@
+.error {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2.5rem 1.25rem; 
+  text-align: center;
+  color: #e60000;
+
+  h1 {
+    font-size: 3rem;       
+    font-weight: 700;       
+    margin: 0 0 1rem;
+    line-height: 1;
+  }
+
+  p {
+    font-size: 1.25rem;   
+    margin: 0 0 2rem;
+    max-width: 32ch;       
+  }
+
+  a {
+    color: #e60000;
+    text-decoration: underline;
+    font-size: 1rem;
+  }
+
+  
+}

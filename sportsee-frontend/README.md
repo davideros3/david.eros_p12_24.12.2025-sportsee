@@ -1,16 +1,60 @@
-# React + Vite
+**SportSee**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SportSee is a sports analytics dashboard built with React and Vite.
+The project includes a backend API and a frontend application.
 
-Currently, two official plugins are available:
+**Installation**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*Clone the project*
 
-## React Compiler
+git clone https://github.com/davideros3/david.eros_p12_24.12.2025-sportsee
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+cd SportSee
 
-## Expanding the ESLint configuration
+**Backend setup**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+cd sportsee-backend
+yarn
+
+yarn run dev
+
+The backend API is available at:
+http://localhost:3000/
+
+**Frontend setup**
+
+cd sportsee-frontend
+
+npm install
+
+npm run dev
+
+The application is available at:
+http://localhost:5174/
+
+**API endpoints**
+
+GET /user/:userId
+Fetches user information.
+
+GET /user/:userId/activity
+Fetches daily activity data.
+
+GET /user/:userId/average-sessions
+Fetches average session durations.
+
+GET /user/:userId/performance
+Fetches user performance metrics.
+
+
+**Technologies**
+
+**Frontend**
+React
+Vite
+Recharts
+React Router
+
+**Backend**
+Node.js
+

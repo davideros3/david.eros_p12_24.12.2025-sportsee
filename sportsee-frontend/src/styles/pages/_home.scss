@@ -6,29 +6,164 @@
     display: grid;
     column-gap: 2rem;
     row-gap: 1rem;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    height: 450px;
+    // grid-template-columns: 1fr 1fr 1fr 1fr;
+    // grid-template-rows: 1fr 1fr;
+    grid-template: 
+      "daily daily daily nutrition" 
+      "average performance score nutrition";
   }
 
   .home-content div {
     // background-color: #f1f1f1;
     // padding: 10px;
-    font-size: 30px;
-    text-align: center;
+    
     border-radius: 16px;
   }
 }
 
 .daily-activity {
-  grid-column-start: 1;
-  grid-column-end: 4;
+  grid-area: daily;
+  // grid-column-start: 1;
+  // grid-column-end: 4;
 }
 
 .nutritions {
-  grid-column-start: 4;
-  grid-column-end: 5;
-  grid-row-start: 1;
-  grid-row-end: 3;
+  grid-area: nutrition;
+  // grid-column-start: 4;
+  // grid-column-end: 5;
+  // grid-row-start: 1;
+  // grid-row-end: 3;
   
+}
+
+.home-content > * {
+  min-width: 0;
+}
+
+.average-session {
+  grid-area: average;
+}
+
+.performance {
+  grid-area: performance;
+}
+
+.today-score {
+  grid-area: score;
+}
+
+.home .home-content {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .home {
+    margin: 2rem;
+  }
+
+  .home .home-content {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "daily daily"
+      "average performance"
+      "score nutrition";
+  }
+}
+
+@media (max-width: 700px) {
+  .home .home-content {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "daily"
+      "average"
+      "performance"
+      "score"
+      "nutrition";
+  }
+}
+
+
+/* shared chart wrapper */
+.chart-card {
+  width: 100%;
+  height: clamp(180px, 22vw, 260px); 
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* variants */
+.chart-card--dark {
+  background: #282D30;
+  padding: 15px;
+}
+
+.chart-card--light {
+  background: #FBFBFB;
+  padding: 10px;
+}
+
+.chart-title {
+  margin: 0;
+  font-size: 12px;
+}
+
+.chart-title {
+  margin: 0;
+  font-size: clamp(11px, 1.1vw, 12px);
+}
+
+.average-title {
+  font-size: clamp(12px, 1.2vw, 14px);
+  line-height: clamp(16px, 1.8vw, 20px);
+}
+
+@media (max-width: 1024px) {
+  .chart-card {
+    height: 240px; 
+  }
+
+  .average-title {
+    font-size: 12px;
+    line-height: 18px;
+    max-width: 130px;
+  }
+
+  .average-tooltip {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+}
+
+
+.chart-card--red {
+  background: #FF0000;
+  padding: 16px;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.average-title {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  line-height: 20px;
+  max-width: 150px;
+  text-align: left; 
+}
+
+.average-chart {
+  width: 100%;
+  height: 85%;
+}
+
+
+.average-tooltip {
+  background: #FFFFFF;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
 }

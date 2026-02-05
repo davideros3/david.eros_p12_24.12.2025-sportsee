@@ -1,8 +1,8 @@
 .top-navigation {
   display: flex;
   align-items: center;
-  gap: 12.5rem;
-  padding-left: 12em;
+  gap: 12rem;
+  padding-left: 11em;
 
   a {
     color: #ffff;
@@ -22,4 +22,23 @@
 
   
 
+}
+
+@media (max-width: 1280px) {
+  .top-navigation {
+    gap: 7rem;
+    padding-left: 8em;
+  }
+}
+
+/* Minimum requirement: 1024px wide */
+@media (max-width: 1024px) {
+  .top-navigation {
+    gap: 4rem;
+    padding-left: 4em;
+  }
+
+  .top-navigation a {
+    font-size: 1.1rem;
+  }
 }
