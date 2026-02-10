@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: utilities/useUserData.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,126 +17,81 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: utilities/useUserData.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * useUserData hook that fetches and provides the main user dashboard data.
+ */
 
+import { useEffect, useState } from "react";
+import { getUser } from "./api";
+import { useParams } from "react-router-dom";
 
-    <h3> </h3>
+/**
+ * Fetches user information, score, and nutrition data based on the route user id.
+ *
+ * @returns {Object} Object containing user data, loading state, and error state.
+ */
+const useUserData = () => {
+  // Gets the user id from the URL parameters.
+  const { userId } = useParams();
 
+  // Stores user profile information.
+  const [userInfos, setUserInfos] = useState(null);
 
+  // Stores the user's daily score.
+  const [todayScore, setTodayScore] = useState(null);
 
+  // Stores nutrition key data values.
+  const [keyData, setKeyData] = useState(null);
 
+  // Stores loading state while fetching data.
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Stores error state when fetching fails.
+  const [error, setError] = useState(false);
 
+  useEffect(() => {
+    // Fetches the user data from the API.
+    const fetchUser = async () => {
+      setIsLoading(true);
+      setError(false);
 
+      try {
+        const user = await getUser(Number(userId));
 
+        setUserInfos(user.data.userInfos);
+        setTodayScore(user.data.todayScore);
+        setKeyData(user.data.keyData);
+      } catch (e) {
+        console.error(e);
+        setError(true);
 
+        setUserInfos(null);
+        setTodayScore(null);
+        setKeyData(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    
+    if (userId) fetchUser();
+  }, [userId]);
 
+  return { userInfos, todayScore, keyData, isLoading, error };
+};
 
-
-
-
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>App.jsx</h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">App.js
-Main application component that defines client-side routing.</div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="App.jsx.html">App.jsx</a>, <a href="App.jsx.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+export default useUserData;
+</code></pre>
+        </article>
+    </section>
 
 
 

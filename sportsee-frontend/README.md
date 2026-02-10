@@ -56,5 +56,6 @@ Recharts
 React Router
 
 **Backend**
-Node.js
+Node.js 
+v24.12.0
 

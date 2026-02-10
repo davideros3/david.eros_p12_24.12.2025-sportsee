@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/AverageSessions.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/AverageSessions.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * AverageSessions component that displays a line chart of the user's average session duration.
+ */
+
+import { ResponsiveContainer, LineChart, Line, XAxis, Tooltip } from "recharts";
+import useUserAverageSessions from "../utilities/useUserAverageSessions";
+
+const DAY_LABELS = ["M", "T", "W", "T", "F", "S", "S"];
+
+/**
+ * Renders the average sessions chart using data from the custom hook.
+ *
+ * @returns {JSX.Element|null}
+ */
+const AverageSessions = () => {
+  const { averageSessions } = useUserAverageSessions();
+  if (!averageSessions) return null;
+
+  const data = averageSessions.map((item) => ({
+    day: DAY_LABELS[item.day - 1],
+    sessionLength: item.sessionLength,
+  }));
+
+  return (
+    // Main container for the average sessions chart.
+    // It applies the red card style for this chart.
+    &lt;div className="chart-card chart-card--red average-card">
+      {/* Displays the chart title above the line chart. */}
+      &lt;p className="average-title">
+        Average speed of &lt;br />
+        your sessions
+      &lt;/p>
+
+      {/* Holds the responsive line chart. */}
+      &lt;div className="average-chart">
+        &lt;ResponsiveContainer>
+          &lt;LineChart data={data} margin={{ top: 30, right: 10, left: 10, bottom: 10 }}>
+            {/* Defines the gradient used for the line color. */}
+            &lt;defs>
+              &lt;linearGradient id="lineColor" x1="0" y1="0" x2="1" y2="0">
+                &lt;stop offset="0%" stopColor="rgba(255,255,255,0.4)" />
+                &lt;stop offset="100%" stopColor="rgba(255,255,255,1)" />
+              &lt;/linearGradient>
+            &lt;/defs>
+
+            {/* Displays the day labels on the X axis. */}
+            &lt;XAxis
+              dataKey="day"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "rgba(255,255,255,0.6)", fontSize: 12 }}
+              dy={10}
+            />
+
+            {/* Displays the tooltip and hover cursor on the chart. */}
+            &lt;Tooltip content={&lt;CustomTooltip />} cursor={&lt;CustomCursor />} />
+
+            {/* Displays the average session line. */}
+            &lt;Line
+              type="monotone"
+              dataKey="sessionLength"
+              stroke="url(#lineColor)"
+              strokeWidth={2.5}
+              dot={false}
+              activeDot={{
+                r: 4,
+                fill: "#FFFFFF",
+                stroke: "rgba(255,255,255,0.3)",
+                strokeWidth: 10,
+              }}
+            />
+          &lt;/LineChart>
+        &lt;/ResponsiveContainer>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+/**
+ * Displays the tooltip content when hovering the line.
+ *
+ * @returns {JSX.Element|null}
+ */
+const CustomTooltip = ({ active, payload }) => {
+  if (!active || !payload?.length) return null;
+  return &lt;div className="average-tooltip">{payload[0].value} min&lt;/div>;
+};
+
+/**
+ * Displays a dark overlay to highlight the hovered area.
+ *
+ * @returns {JSX.Element|null}
+ */
+const CustomCursor = ({ points, width, height }) => {
+  if (!points?.length) return null;
+
+  const x = points[0].x;
+  return (
+    &lt;rect
+      x={x}
+      y={0}
+      width={width - x}
+      height={height}
+      fill="rgba(0,0,0,0.10)"
+    />
+  );
+};
+
+export default AverageSessions;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AverageSessions">AverageSessions</a></li><li><a href="global.html#CustomCursor">CustomCursor</a></li><li><a href="global.html#CustomTooltip">CustomTooltip</a></li><li><a href="global.html#DATUM_LABELS">DATUM_LABELS</a></li><li><a href="global.html#DailyActivity">DailyActivity</a></li><li><a href="global.html#Error">Error</a></li><li><a href="global.html#ErrorMessage">ErrorMessage</a></li><li><a href="global.html#Greeting">Greeting</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Icons">Icons</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#LeftNavbar">LeftNavbar</a></li><li><a href="global.html#Logo">Logo</a></li><li><a href="global.html#NutritionItem">NutritionItem</a></li><li><a href="global.html#Nutritions">Nutritions</a></li><li><a href="global.html#PerformanceRadar">PerformanceRadar</a></li><li><a href="global.html#PieScoreChart">PieScoreChart</a></li><li><a href="global.html#TopHeader">TopHeader</a></li><li><a href="global.html#TopNavigation">TopNavigation</a></li><li><a href="global.html#getJson">getJson</a></li><li><a href="global.html#useUserActivity">useUserActivity</a></li><li><a href="global.html#useUserAverageSessions">useUserAverageSessions</a></li><li><a href="global.html#useUserData">useUserData</a></li><li><a href="global.html#useUserPerformance">useUserPerformance</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Feb 05 2026 19:01:00 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

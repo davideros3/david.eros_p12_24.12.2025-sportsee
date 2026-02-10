@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/PieScoreChart.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,126 +17,92 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/PieScoreChart.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * PieScoreChart component that displays the user's score as a pie chart.
+ */
 
+import { ResponsiveContainer, PieChart, Pie } from "recharts";
+import PropTypes from "prop-types";
 
-    <h3> </h3>
+/**
+ * Renders a circular chart showing the daily score percentage.
+ *
+ * @param {Object} props
+ * @param {number} props.todayScore - User's daily score (value between 0 and 1).
+ * @returns {JSX.Element|null}
+ */
+const PieScoreChart = ({ todayScore }) => {
+  // Stops rendering if the score is not available.
+  if (todayScore == null) return null;
 
+  // Converts the score value into a percentage.
+  const score = Math.round(todayScore * 100);
 
+  // Builds the data used to display the filled and remaining parts of the chart.
+  const data = [
+    { name: "score", value: score, fill: "#FF0000" },
+    { name: "rest", value: 100 - score, fill: "#FBFBFB" },
+  ];
 
+  return (
+    &lt;div className="chart-card chart-card--light">
+      &lt;p className="chart-title">Score&lt;/p>
 
+      &lt;ResponsiveContainer width="100%" height="100%">
+        &lt;PieChart>
+          &lt;Pie
+            data={data}
+            dataKey="value"
+            innerRadius="60%"
+            outerRadius="80%"
+            startAngle={90}
+            endAngle={-270}
+          />
 
+          &lt;text
+            x="50%"
+            y="45%"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize={24}
+            fontWeight="bold"
+          >
+            {score}%
+          &lt;/text>
 
+          &lt;text
+            x="50%"
+            y="55%"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize={14}
+            fill="#74798C"
+          >
+            of your goal
+          &lt;/text>
+        &lt;/PieChart>
+      &lt;/ResponsiveContainer>
+    &lt;/div>
+  );
+};
 
+PieScoreChart.propTypes = {
+  todayScore: PropTypes.number,
+};
 
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>App.jsx</h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">App.js
-Main application component that defines client-side routing.</div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="App.jsx.html">App.jsx</a>, <a href="App.jsx.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+export default PieScoreChart;
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -1,5 +1,5 @@
 {
-   "source": { "include": ["src"] },
+   "source": { "include": ["src", "src/components", "src/pages", "src/utilities"] },
     "plugins": [],
     "templates": { "default": { "outputSourceFiles": true } },
     "opts": { "destination": "./docs" }

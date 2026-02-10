@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: App.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,126 +17,57 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: App.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file App.js
+ * Main application component that defines client-side routing.
+ */
 
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
+import Community from "./pages/Community";
+import Layout from "../src/components/Layout";
+import "./styles/style.scss";
+import NotFound from "./pages/NotFound"
 
-    <h3> </h3>
+/**
+ * Root application component.
+ * Wraps the app with React Router and defines all routes.
+ *
+ * @returns {JSX.Element}
+ */
+function App() {
+  return (
+    &lt;BrowserRouter>
+      &lt;Routes>
+        &lt;Route element={&lt;Layout />}>
+          &lt;Route path="/" element={&lt;Home />} />
+          &lt;Route path="/user/:userId" element={&lt;Home />} />
+          &lt;Route path="/profile" element={&lt;Profile />} />
+          &lt;Route path="/settings" element={&lt;Settings />} />
+          &lt;Route path="/community" element={&lt;Community />} />
+          &lt;Route path="/404" element={&lt;NotFound />} />
+          &lt;Route path="*" element={&lt;NotFound />} />
+        &lt;/Route>
+      &lt;/Routes>
+    &lt;/BrowserRouter>
+  );
+}
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>App.jsx</h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">App.js
-Main application component that defines client-side routing.</div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="App.jsx.html">App.jsx</a>, <a href="App.jsx.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+export default App;
+</code></pre>
+        </article>
+    </section>
 
 
 

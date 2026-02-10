@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/PerformanceRadar.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,126 +17,83 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/PerformanceRadar.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * PerformanceRadar component that displays user performance data in a radar chart.
+ */
 
+import {
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ResponsiveContainer,
+} from "recharts";
+import useUserPerformance from "../utilities/useUserPerformance";
 
-    <h3> </h3>
+/**
+ * Renders a radar chart showing different performance metrics.
+ *
+ * @returns {JSX.Element|null}
+ */
+const PerformanceRadar = () => {
+  // Gets performance labels and values from the custom hook.
+  const { performance, performanceData } = useUserPerformance();
 
+  // Stops rendering if performance data is not available.
+  if (!performance || !performanceData) return null;
 
+  // Formats the performance data to match the radar chart structure.
+  const chartData = performanceData.map((item) => ({
+    subject: performance[item.kind],
+    value: item.value,
+  }));
 
+  return (
+    // Main container for the performance radar chart.
+    // It applies a dark style to the chart card.
+    &lt;div className="chart-card chart-card--dark">
+      {/* Makes the chart responsive to its container size. */}
+      &lt;ResponsiveContainer width="100%" height="100%">
+        &lt;RadarChart data={chartData} outerRadius="75%">
+          {/* Displays the grid lines of the radar chart. */}
+          &lt;PolarGrid stroke="#FFFFFF" radialLines={false} />
 
+          {/* Displays the labels around the radar chart. */}
+          &lt;PolarAngleAxis
+            dataKey="subject"
+            tick={{ fontSize: 10, fill: "#FFFFFF" }}
+          />
 
+          {/* Hides the radius axis for a cleaner look. */}
+          &lt;PolarRadiusAxis tick={false} axisLine={false} />
 
+          {/* Displays the red radar shape representing performance values. */}
+          &lt;Radar
+            dataKey="value"
+            stroke="#FF0101"
+            fill="#FF0101"
+            fillOpacity={0.7}
+          />
+        &lt;/RadarChart>
+      &lt;/ResponsiveContainer>
+    &lt;/div>
+  );
+};
 
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>App.jsx</h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">App.js
-Main application component that defines client-side routing.</div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="App.jsx.html">App.jsx</a>, <a href="App.jsx.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+export default PerformanceRadar;
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: utilities/api.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,126 +17,58 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: utilities/api.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * API utility functions used to fetch user data from the backend.
+ */
+
+// Base URL for all API requests.
+const API_BASE_URL = "http://localhost:3000";
+
+/**
+ * Fetches JSON data from the given API endpoint.
+ *
+ * @returns {Promise&lt;Object>}
+ */
+async function getJson(url) {
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error(`API error ${res.status} for ${url}`);
+  }
+
+  return res.json();
+}
+
+// Fetches main user information by user id.
+export const getUser = (userId) =>
+  getJson(`${API_BASE_URL}/user/${userId}`);
+
+// Fetches user daily activity sessions.
+export const getUserActivity = (userId) =>
+  getJson(`${API_BASE_URL}/user/${userId}/activity`);
+
+// Fetches user average session data.
+export const getUserAverageSessions = (userId) =>
+  getJson(`${API_BASE_URL}/user/${userId}/average-sessions`);
+
+// Fetches user performance metrics.
+export const getUserPerformance = (userId) =>
+  getJson(`${API_BASE_URL}/user/${userId}/performance`);
 
 
-    <h3> </h3>
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>App.jsx</h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">App.js
-Main application component that defines client-side routing.</div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="App.jsx.html">App.jsx</a>, <a href="App.jsx.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+</code></pre>
+        </article>
+    </section>
 
 
 

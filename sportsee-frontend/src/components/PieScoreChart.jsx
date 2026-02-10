@@ -3,10 +3,13 @@
  */
 
 import { ResponsiveContainer, PieChart, Pie } from "recharts";
+import PropTypes from "prop-types";
 
 /**
  * Renders a circular chart showing the daily score percentage.
  *
+ * @param {Object} props
+ * @param {number} props.todayScore - User's daily score (value between 0 and 1).
  * @returns {JSX.Element|null}
  */
 const PieScoreChart = ({ todayScore }) => {
@@ -23,16 +26,11 @@ const PieScoreChart = ({ todayScore }) => {
   ];
 
   return (
-    // Main container for the score chart.
-    // It applies a light style to the chart card.
     <div className="chart-card chart-card--light">
-      {/* Displays the chart title above the pie chart. */}
       <p className="chart-title">Score</p>
 
-      {/* Makes the pie chart responsive to its container size. */}
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
-          {/* Displays the circular progress based on the score value. */}
           <Pie
             data={data}
             dataKey="value"
@@ -42,7 +40,6 @@ const PieScoreChart = ({ todayScore }) => {
             endAngle={-270}
           />
 
-          {/* Displays the score percentage at the center of the chart. */}
           <text
             x="50%"
             y="45%"
@@ -54,7 +51,6 @@ const PieScoreChart = ({ todayScore }) => {
             {score}%
           </text>
 
-          {/* Displays the subtitle text under the score percentage. */}
           <text
             x="50%"
             y="55%"
@@ -69,6 +65,10 @@ const PieScoreChart = ({ todayScore }) => {
       </ResponsiveContainer>
     </div>
   );
+};
+
+PieScoreChart.propTypes = {
+  todayScore: PropTypes.number,
 };
 
 export default PieScoreChart;

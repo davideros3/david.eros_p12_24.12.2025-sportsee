@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/NutritionItem.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,126 +17,49 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/NutritionItem.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * NutritionItem component that displays a nutrition value with an icon and label.
+ */
+
+import Icons from "./Icons";
+
+/**
+ * Renders a nutrition item using the provided data.
+ *
+ * @returns {JSX.Element}
+ */
+const NutritionItem = ({ icon_name, value, unit, label }) => {
+  return (
+    &lt;div className="nutrition-item">
+      &lt;Icons icon_name={icon_name} label={label} />
+
+      &lt;div className="nutrition-text">
+        &lt;span className="nutrition-value">
+          {value}
+          &lt;span className="nutrition-unit">{unit}&lt;/span>
+        &lt;/span>
+
+        &lt;p className="nutrition-label">{label}&lt;/p>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default NutritionItem;
 
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>App.jsx</h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">App.js
-Main application component that defines client-side routing.</div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="App.jsx.html">App.jsx</a>, <a href="App.jsx.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+</code></pre>
+        </article>
+    </section>
 
 
 
