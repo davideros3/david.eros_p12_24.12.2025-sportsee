@@ -3,10 +3,16 @@
  */
 
 import Icons from "./Icons";
+import PropTypes from "prop-types";
 
 /**
  * Renders a nutrition item using the provided data.
  *
+ * @param {Object} props
+ * @param {string} props.icon_name - Name of the icon to display.
+ * @param {number} props.value - Nutrition value.
+ * @param {string} props.unit - Unit of the nutrition value.
+ * @param {string} props.label - Label of the nutrition type.
  * @returns {JSX.Element}
  */
 const NutritionItem = ({ icon_name, value, unit, label }) => {
@@ -24,6 +30,13 @@ const NutritionItem = ({ icon_name, value, unit, label }) => {
       </div>
     </div>
   );
+};
+
+NutritionItem.propTypes = {
+  icon_name: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  unit: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default NutritionItem;

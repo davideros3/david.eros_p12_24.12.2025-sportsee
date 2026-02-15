@@ -4,10 +4,17 @@
 
 import Icons from "./Icons";
 import NutritionItem from "./NutritionItem";
+import PropTypes from "prop-types";
 
 /**
  * Renders nutrition items using the provided nutrition data.
  *
+ * @param {Object} props
+ * @param {Object} props.keyData - Object containing nutrition values.
+ * @param {number} props.keyData.calorieCount - Total calories.
+ * @param {number} props.keyData.proteinCount - Total proteins.
+ * @param {number} props.keyData.carbohydrateCount - Total carbohydrates.
+ * @param {number} props.keyData.lipidCount - Total lipids.
  * @returns {JSX.Element|null}
  */
 const Nutritions = ({ keyData }) => {
@@ -31,11 +38,7 @@ const Nutritions = ({ keyData }) => {
   ];
 
   return (
-    // Main layout container for all nutrition cards.
-    // It groups all nutrition items in a single section.
     <div className="nutritions-layout">
-      {/* Loops through nutrition items and renders one component per value. */}
-      {/* Each NutritionItem shows an icon, a value, and a label. */}
       {items.map(({ icon_name, value, unit, label }) => (
         <NutritionItem
           key={label}
@@ -47,6 +50,15 @@ const Nutritions = ({ keyData }) => {
       ))}
     </div>
   );
+};
+
+Nutritions.propTypes = {
+  keyData: PropTypes.shape({
+    calorieCount: PropTypes.number,
+    proteinCount: PropTypes.number,
+    carbohydrateCount: PropTypes.number,
+    lipidCount: PropTypes.number,
+  }),
 };
 
 export default Nutritions;

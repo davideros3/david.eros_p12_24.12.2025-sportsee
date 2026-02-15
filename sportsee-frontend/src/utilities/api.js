@@ -5,6 +5,13 @@
 // Base URL for all API requests.
 const API_BASE_URL = "http://localhost:3000";
 
+// class UserNotFoundError extends Error {
+//   constructor(message) {
+//     super(message);
+//     this.name = "UserNotFoundError";
+//   }
+// }
+
 /**
  * Fetches JSON data from the given API endpoint.
  *
@@ -12,10 +19,19 @@ const API_BASE_URL = "http://localhost:3000";
  */
 async function getJson(url) {
   const res = await fetch(url);
+  
+  // if (res.status === 404) { 
+  //   throw new UserNotFoundError("User Not Found. Please check the user ID and try again.")
+  // } else if (!res.ok) {
+  //   console.log(res)
+  //   throw new Error(`API error ${res.status} for ${url}`);
+  // }
 
   if (!res.ok) {
     throw new Error(`API error ${res.status} for ${url}`);
   }
+
+
 
   return res.json();
 }

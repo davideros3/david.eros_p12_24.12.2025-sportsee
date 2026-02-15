@@ -2,6 +2,7 @@
  * DailyActivity component that displays a bar chart of daily weight and calories.
  */
 
+import PropTypes from "prop-types";
 import {
   BarChart,
   Bar,
@@ -20,6 +21,34 @@ import useUserActivity from "../utilities/useUserActivity";
 const DATUM_LABELS = ["1", "2", "3", "4", "5", "6", "7"];
 
 /**
+ * Shows values when hovering over a bar.
+ *
+ * @param {Object} props
+ * @param {boolean} props.active - Indicates if the tooltip is active.
+ * @param {Array} props.payload - Data displayed inside the tooltip.
+ * @returns {JSX.Element|null}
+ */
+const CustomTooltip = ({ active, payload }) => {
+  if (!active || !payload?.length) return null;
+
+  return (
+    <div className="activity-tooltip">
+      <p>{payload[0]?.value}kg</p>
+      <p>{payload[1]?.value}kCal</p>
+    </div>
+  );
+};
+
+CustomTooltip.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.number,
+    })
+  ),
+};
+
+/**
  * Renders the daily activity chart using session data.
  *
  * @returns {JSX.Element|null}
@@ -35,20 +64,8 @@ const DailyActivity = () => {
   const data = sessions.map((item, index) => ({
     kg: item.kilogram,
     kcal: item.calories,
-    datum: DATUM_LABELS[index],
+    datum: DATUM_LABELS[index] ?? String(index + 1),
   }));
-
-  // Shows values when hovering over a bar.
-  const CustomTooltip = ({ active, payload }) => {
-    if (!active || !payload?.length) return null;
-
-    return (
-      <div className="activity-tooltip">
-        <p>{payload[0].value}kg</p>
-        <p>{payload[1].value}kCal</p>
-      </div>
-    );
-  };
 
   return (
     <section className="activity-card">

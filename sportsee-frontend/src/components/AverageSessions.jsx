@@ -1,9 +1,6 @@
-/**
- * AverageSessions component that displays a line chart of the user's average session duration.
- */
-
 import { ResponsiveContainer, LineChart, Line, XAxis, Tooltip } from "recharts";
 import useUserAverageSessions from "../utilities/useUserAverageSessions";
+import PropTypes from "prop-types";
 
 const DAY_LABELS = ["M", "T", "W", "T", "F", "S", "S"];
 
@@ -22,20 +19,15 @@ const AverageSessions = () => {
   }));
 
   return (
-    // Main container for the average sessions chart.
-    // It applies the red card style for this chart.
     <div className="chart-card chart-card--red average-card">
-      {/* Displays the chart title above the line chart. */}
       <p className="average-title">
         Average speed of <br />
         your sessions
       </p>
 
-      {/* Holds the responsive line chart. */}
       <div className="average-chart">
         <ResponsiveContainer>
           <LineChart data={data} margin={{ top: 30, right: 10, left: 10, bottom: 10 }}>
-            {/* Defines the gradient used for the line color. */}
             <defs>
               <linearGradient id="lineColor" x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0%" stopColor="rgba(255,255,255,0.4)" />
@@ -43,7 +35,6 @@ const AverageSessions = () => {
               </linearGradient>
             </defs>
 
-            {/* Displays the day labels on the X axis. */}
             <XAxis
               dataKey="day"
               axisLine={false}
@@ -52,10 +43,8 @@ const AverageSessions = () => {
               dy={10}
             />
 
-            {/* Displays the tooltip and hover cursor on the chart. */}
             <Tooltip content={<CustomTooltip />} cursor={<CustomCursor />} />
 
-            {/* Displays the average session line. */}
             <Line
               type="monotone"
               dataKey="sessionLength"
@@ -79,6 +68,9 @@ const AverageSessions = () => {
 /**
  * Displays the tooltip content when hovering the line.
  *
+ * @param {Object} props
+ * @param {boolean} props.active - Indicates if the tooltip is active.
+ * @param {Array} props.payload - Data displayed inside the tooltip.
  * @returns {JSX.Element|null}
  */
 const CustomTooltip = ({ active, payload }) => {
@@ -86,9 +78,18 @@ const CustomTooltip = ({ active, payload }) => {
   return <div className="average-tooltip">{payload[0].value} min</div>;
 };
 
+CustomTooltip.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.array,
+};
+
 /**
  * Displays a dark overlay to highlight the hovered area.
  *
+ * @param {Object} props
+ * @param {Array} props.points - Coordinates of the hovered point.
+ * @param {number} props.width - Width of the chart area.
+ * @param {number} props.height - Height of the chart area.
  * @returns {JSX.Element|null}
  */
 const CustomCursor = ({ points, width, height }) => {
@@ -106,4 +107,11 @@ const CustomCursor = ({ points, width, height }) => {
   );
 };
 
+CustomCursor.propTypes = {
+  points: PropTypes.array,
+  width: PropTypes.number,
+  height: PropTypes.number,
+};
+
 export default AverageSessions;
+

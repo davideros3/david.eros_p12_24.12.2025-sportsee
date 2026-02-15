@@ -10,6 +10,7 @@ import useUserData from "../utilities/useUserData";
 import AverageSessions from "../components/AverageSessions";
 import PieScoreChart from "../components/PieScoreChart";
 import { Navigate } from "react-router-dom";
+// import UserNotFoundError from "../utilities/api"
 
 /**
  * Renders the home dashboard using user data and chart components.
@@ -17,7 +18,26 @@ import { Navigate } from "react-router-dom";
  * @returns {JSX.Element|null}
  */
 const Home = () => {
-  // Gets user data and state from the custom hook.
+ 
+  // let userData
+  // // Gets user data and state from the custom hook.
+  // try {
+  //   userData = await useUserData();
+  //   const { userInfos, todayScore, keyData, isLoading, error } = userData
+  //   // Stops rendering while data is loading.
+  //   if (isLoading) return null;
+  // } catch (e) {
+  //   // if e.name === "UserNotFoundError" --> return <div>{e.message} </div
+  //   console.log(e)
+  // }
+
+
+  // // Redirects to the error page if data is missing or an error occurs.
+  // // if (error && error.name === "UserNotFoundError") {
+  // //   console.log("user not found")
+  // // } else if (error || !userInfos) {
+  // //   return <Navigate to="/404" replace />;
+  // // }
   const { userInfos, todayScore, keyData, isLoading, error } = useUserData();
 
   // Stops rendering while data is loading.
@@ -27,6 +47,9 @@ const Home = () => {
   if (error || !userInfos) {
     return <Navigate to="/404" replace />;
   }
+  
+  
+
 
   return (
     // Main container for the home page.

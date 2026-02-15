@@ -2,9 +2,13 @@
  * Icons component that displays an SVG icon based on its name.
  */
 
+import PropTypes from "prop-types";
+
 /**
  * Renders an icon image using the provided icon name.
  *
+ * @param {Object} props
+ * @param {string} props.icon_name - Name of the icon file to display.
  * @returns {JSX.Element}
  */
 const Icons = ({ icon_name }) => {
@@ -21,5 +25,10 @@ const Icons = ({ icon_name }) => {
   );
 };
 
+Icons.propTypes = {
+  icon_name: PropTypes.string.isRequired,
+};
+
 export default Icons;
+
 
